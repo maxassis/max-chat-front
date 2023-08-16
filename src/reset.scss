@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;900&display=swap');
+
+/* Use a more intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Remove all margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Only show focus outline when the user is tabbing (not when clicking) */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 1px solid blue;
+}
+
+/* Prevent mobile browsers increasing font-size */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Allow percentage-based heights */
+/* Setting width: 100% isn't required because it is a default for block-level elements (html and body are block level) */
+html, body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  /* Prevent the rubber band effect when the user scrolls to the top or bottom of the page (WebKit only) */
+  overscroll-behavior: none;
+
+  /* Prevent the browser from synthesizing missing typefaces */
+  font-synthesis: none;
+
+  color: black;
+  /* UI controls color (example: range input) */
+  accent-color: black;
+
+  /* Because overscroll-behavior: none only works on WebKit, a background color is set that will show when overscroll occurs  */
+  background: white;
+}
+
+/* Remove unintuitive behaviour such as gaps around media elements.  */
+img, picture, video, canvas, svg, iframe {
+  display: block;
+}
+
+/* Avoid text overflow */
+h1, h2, h3, h4, h5, h6, p, strong {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input {
+  border: none;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+
