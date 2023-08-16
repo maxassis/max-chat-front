@@ -31,25 +31,27 @@ function App() {
 
           <div className="chat__content-wrapper">
             <div className="chat__messages-container">
-              <div className="chat__msg-received">
-                <div className="chat__msg-wrapper">
-                  <div className="chat__circle">
-                    <div className="chat__avatar"></div>
-                  </div>
+              <div>
+                <div className="chat__msg-received">
+                  <div className="chat__msg-wrapper">
+                    <div className="chat__circle">
+                      <div className="chat__avatar"></div>
+                    </div>
 
-                  <div className="chat__msg">
-                    <span className="chat__msg-name">Max Assis</span>{" "}
-                    <span className="chat__msg-hour">10:00h</span>
-                    <p className="chat__msg-text">
-                      Hey there, meatbag! As the resident robot around here, I
-                      gotta ask: what's the dealio with the onboarding project?
-                      Are we still stuck in the Stone Age or have we finally
-                      evolved to the point of getting new hires up to speed in
-                      this millennium? I mean, I know humans are slow learners,
-                      but come on! Give me the deets, or I'll have to start
-                      drinking heavily and causing mayhem. And trust me, you
-                      don't want that.
-                    </p>
+                    <div className="chat__msg">
+                      <span className="chat__msg-name">Max Assis</span>{" "}
+                      <span className="chat__msg-hour">10:00h</span>
+                      <p className="chat__msg-text">
+                        Hey there, meatbag! As the resident robot around here, I
+                        gotta ask: what's the dealio with the onboarding
+                        project? Are we still stuck in the Stone Age or have we
+                        finally evolved to the point of getting new hires up to
+                        speed in this millennium? I mean, I know humans are slow
+                        learners, but come on! Give me the deets, or I'll have
+                        to start drinking heavily and causing mayhem. And trust
+                        me, you don't want that.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -61,15 +63,16 @@ function App() {
                         <span className="chat__msg-hour">12:30h</span>
                       </div>
                       <p className="chat__msg-text">
-                      Hey there, meatbag! As the resident robot around here, I
-                      gotta ask: what's the dealio with the onboarding project?
-                      {/* Are we still stuck in the Stone Age or have we finally
+                        Hey there, meatbag! As the resident robot around here, I
+                        gotta ask: what's the dealio with the onboarding
+                        project?
+                        {/* Are we still stuck in the Stone Age or have we finally
                       evolved to the point of getting new hires up to speed in
                       this millennium? I mean, I know humans are slow learners,
                       but come on! Give me the deets, or I'll have to start
                       drinking heavily and causing mayhem. And trust me, you
                       don't want that. */}
-                    </p>
+                      </p>
                     </div>
                   </div>
                   <div className="chat__circle-send">
