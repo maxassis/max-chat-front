@@ -61,9 +61,9 @@ function App() {
               <div className="chat__msg-send">
                 <div className="chat__msg-send-wrapper">
                   <div className="chat__message-send">
-                    <div>
-                      <span className="chat__msg-name">Joao da Silva</span>{" "}
-                      <span className="chat__msg-hour">12:30h</span>
+                    <div style={{ textAlign: "right" }}>
+                      <span className="chat__msg-hour">12:30h</span>{" "}
+                      <span className="chat__msg-name">Joao da Silva</span>  
                     </div>
                     <p className="chat__msg-text">
                       Hey there, meatbag! As the resident robot around here, I
@@ -85,9 +85,9 @@ function App() {
               <div className="chat__msg-send">
                 <div className="chat__msg-send-wrapper">
                   <div className="chat__message-send">
-                    <div>
-                      <span className="chat__msg-name">Joao da Silva</span>{" "}
-                      <span className="chat__msg-hour">12:30h</span>
+                    <div style={{ textAlign: "right" }}>
+                      <span className="chat__msg-hour">12:30h</span>{" "}
+                      <span className="chat__msg-name">Joao da Silva</span>  
                     </div>
                     <p className="chat__msg-text">
                       Hey there, meatbag! As the resident robot around here, I
