@@ -186,4 +186,64 @@
         grid-row: 3/4;
     }
 
+    &__modal {
+        inset: 0;
+        position: fixed;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: grid;
+        place-items: center;
+    }
+
+    &__modal--hidden {
+        display: none;
+    }
+
+    &__modal-content {
+        inline-size: 400px;
+        block-size: 180px;
+        background-color: #fff;
+        border-radius: 0.625rem;
+        padding-block-start: 15px;
+
+        h3 {
+            text-align: center;
+            color: #283C46;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5rem;
+            margin-block-end: 20px;
+        }
+
+        input {
+            display: block;
+            margin-inline: auto;
+            inline-size: 80%;
+            block-size: 2.75rem;
+            outline: none;
+            padding: 0.69rem 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid rgba(34, 34, 34, 0.15);
+            box-shadow: 0px 1px 4px 0px rgba(34, 34, 34, 0.10) inset;
+        }
+
+        button {
+            display: block;
+            margin-inline: auto;
+            margin-block-start: 15px;
+            @extend .chat__button;
+        }
+    }
+
+    &__modal-error {
+        display: block;
+        text-align: center;
+        color: red;
+        font-size: 0.8rem;
+        display: none;
+    }
+
+    &__modal-error--show {
+        display: block !important;
+    }
 }
