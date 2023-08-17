@@ -40,7 +40,9 @@
 
     &__content-wrapper {
         display: grid;
-       // grid-template-rows: 1fr 138px;
+        justify-content: flex-end;
+        margin-block: 15px;
+        overflow: scroll;
     }
 
     &__messages-container {
