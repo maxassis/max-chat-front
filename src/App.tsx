@@ -65,13 +65,12 @@ function App() {
                       <p className="chat__msg-text">
                         Hey there, meatbag! As the resident robot around here, I
                         gotta ask: what's the dealio with the onboarding
-                        project?
-                        {/* Are we still stuck in the Stone Age or have we finally
-                      evolved to the point of getting new hires up to speed in
-                      this millennium? I mean, I know humans are slow learners,
-                      but come on! Give me the deets, or I'll have to start
-                      drinking heavily and causing mayhem. And trust me, you
-                      don't want that. */}
+                        project? Are we still stuck in the Stone Age or have we
+                        finally evolved to the point of getting new hires up to
+                        speed in this millennium? I mean, I know humans are slow
+                        learners, but come on! Give me the deets, or I'll have
+                        to start drinking heavily and causing mayhem. And trust
+                        me, you don't want that.
                       </p>
                     </div>
                   </div>
@@ -81,18 +80,18 @@ function App() {
                 </div>
               </div>
             </div>
-
-            <form className="chat_form">
-              <textarea
-                className="chat__write-msg"
-                placeholder="Escreva uma mensagem..."
-              ></textarea>
-
-              <div className="chat__button-wrapper">
-                <button>Enviar</button>
-              </div>
-            </form>
           </div>
+
+          <form className="chat_form">
+            <textarea
+              className="chat__write-msg"
+              placeholder="Escreva uma mensagem..."
+            ></textarea>
+
+            <div className="chat__button-wrapper">
+              <button>Enviar</button>
+            </div>
+          </form>
         </div>
       </div>
     </>
