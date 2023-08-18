@@ -1,6 +1,6 @@
 import "./App.scss";
 import io from "socket.io-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import classNames from 'classnames';
 
@@ -21,6 +21,12 @@ function App() {
   const [modalInput, setModalInput] = useState("");
   const [name, setName] = useState("");
   const [modal, setModal] = useState(false);
+  const ref = useRef<HTMLDivElement>(null)
+
+  const scrollToLast = () => {
+    const lastChildElement = ref.current?.lastElementChild;
+    lastChildElement?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
     function receivedMessage(message: Msg) {
@@ -28,6 +34,9 @@ function App() {
       console.log(newMessage);
       setchat([...chat, newMessage]);
       setMessage("");
+      setTimeout(() => {
+        scrollToLast()
+      }, 400);    
     }
 
     socket.on("msgToClient", (message: Msg) => {
@@ -83,9 +92,9 @@ function App() {
             <h2 className="chat__name">{name}</h2>
           </div>
 
-          <div className="chat__content-wrapper">
-            <div style={{ inlineSize: "100%" }}>
-              <div className="chat__messages-container">
+          {/* <div className="chat__content-wrapper"> */}
+            <div className="chat__messages" >
+              <div className="chat__messages-container" ref={ref}>
                 {chat &&
                   chat.map((item, index) => {
                     if (item.user === user) {
@@ -125,7 +134,7 @@ function App() {
                   })}
               </div>
             </div>
-          </div>
+          {/* </div> */}
 
           <form className="chat_form">
             <input
