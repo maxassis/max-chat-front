@@ -11,6 +11,7 @@ const user = uuidv4();
 type Msg = {
   user: string;
   message: string;
+  name: string
 };
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
   function sendMessage(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();    
     if(message.trim() === "") return
-    socket.emit("msgToServer", { user, message });
+    socket.emit("msgToServer", { user, name, message });
   }
 
   function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -94,7 +95,7 @@ function App() {
                             <div className="chat__message-send">
                               <div style={{ textAlign: "right" }}>
                                 <span className="chat__msg-hour">12:30h</span>{" "}
-                                  {user === item.user ? <span className="chat__msg-name">Max Assis</span> : <span className="chat__msg-name">usuario</span>}
+                                  {user === item.user ? <span className="chat__msg-name">{name}</span> : <span className="chat__msg-name">usuario</span>}
                               </div>
                               <p className="chat__msg-text">{item.message}</p>
                             </div>
@@ -113,7 +114,7 @@ function App() {
                             </div>
 
                             <div className="chat__msg">
-                              <span className="chat__msg-name">usuario</span>{" "}
+                              <span className="chat__msg-name">{item.name}</span>{" "}
                               <span className="chat__msg-hour">10:00h</span>
                               <p className="chat__msg-text">{item.message}</p>
                             </div>
