@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import classNames from 'classnames';
 
-const socket = io("http://localhost:3333");
+const socket = io("https://max-chat-f7uh.onrender.com");
 
 const user = uuidv4();
 
@@ -89,7 +89,7 @@ function App() {
 
         <div className="chat__container">
           <div className="chat__users">
-            <h2 className="chat__name">{name}</h2>
+            <h2 className="chat__name">Max Chat Beta</h2>
           </div>
 
           {/* <div className="chat__content-wrapper"> */}
