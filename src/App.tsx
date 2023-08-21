@@ -33,10 +33,9 @@ function App() {
       const newMessage: Msg = message;
       console.log(newMessage);
       setchat([...chat, newMessage]);
-      setMessage("");
       setTimeout(() => {
         scrollToLast()
-      }, 400);    
+      }, 300);    
     }
 
     socket.on("msgToClient", (message: Msg) => {
