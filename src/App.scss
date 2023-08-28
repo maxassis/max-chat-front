@@ -169,7 +169,7 @@
     &__button-wrapper {
         display: flex;
         justify-content: flex-end;
-        margin-block-start: 0.5rem;
+        // margin-block-start: 0.5rem;
     }
 
     &__button {
@@ -190,7 +190,12 @@
     }
 
     &__form {
+        position: relative;
         grid-row: 3/4;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding-inline: 0.5rem;
     }
 
     &__modal {
@@ -240,6 +245,21 @@
             margin-block-start: 0.938rem;
             @extend .chat__button;
         }
+    }
+
+    &__smile {
+        cursor: pointer;
+    }
+
+    &__emojis-wrapper {
+        position: absolute;
+        inset-block-start: -417px;
+        display: none;
+        z-index: 3;
+    }
+
+    &__emojis-wrapper--show {
+        display: block !important; 
     }
 
     &__modal-error {

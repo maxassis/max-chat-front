@@ -3,6 +3,10 @@ import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import classNames from 'classnames';
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import i18n from "@emoji-mart/data/i18n/pt.json";
+
 
 const socket = io("https://max-chat-f7uh.onrender.com");
 
@@ -16,6 +20,7 @@ type Msg = {
 
 function App() {
   const [error, setError] = useState(false);
+  const [emojiShow, setEmojiShow] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setchat] = useState<Msg[]>([]);
   const [modalInput, setModalInput] = useState("");
@@ -31,7 +36,7 @@ function App() {
   useEffect(() => {
     function receivedMessage(message: Msg) {
       const newMessage: Msg = message;
-      console.log(newMessage);
+     // console.log(newMessage);
       setchat([...chat, newMessage]);
       setTimeout(() => {
         scrollToLast()
@@ -53,10 +58,16 @@ function App() {
     'chat__modal--hidden' : modal
   })
 
+  const emoji = classNames({
+    'chat__emojis-wrapper--show': emojiShow,
+    'chat__emojis-wrapper': true
+  })
+
   function sendMessage(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();    
-    if(message.trim() === "") return
+    if(message.trimStart() === "") return
     socket.emit("msgToServer", { user, name, message });
+    setMessage("");
   }
 
   function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -71,12 +82,20 @@ function App() {
     }
   }
 
+  
+  function show({ native }: { native: string }) {
+    // console.log(native);
+    setMessage(`${message}${native}`);
+    //console.log(message);
+  }
+
   return (
     <>
       <div className="external-container">
         <div className={modalShow}>
             <div className="chat__modal-content">
               <h3>Digite seu nome:</h3>
+              <h1>{message}</h1>  
               <form>
               <input type="text" value={modalInput} onChange={(e) => setModalInput(e.target.value)}/>
               <span className={modalSpan} >Nome e obrigatorio</span>
@@ -91,7 +110,6 @@ function App() {
             <h2 className="chat__name">Max Chat Beta</h2>
           </div>
 
-          {/* <div className="chat__content-wrapper"> */}
             <div className="chat__messages" >
               <div className="chat__messages-container" ref={ref}>
                 {chat &&
@@ -133,9 +151,28 @@ function App() {
                   })}
               </div>
             </div>
-          {/* </div> */}
 
-          <form className="chat_form">
+          <form className="chat__form">
+          <div className={emoji}>
+            <Picker
+              data={data}
+              perLine="6"
+              emojiSize="24"
+              theme="light"
+              previewPosition="none"
+              onEmojiSelect={show}
+              // onClickOutside={() => setEmojiShow(false)}
+              i18n={i18n}
+            />
+          </div>       
+     
+          <div style={{cursor: 'pointer'}} onClick={() => setEmojiShow(!emojiShow)}>  
+          <svg className="chat__smile" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+          </svg>
+          </div>      
+
             <input
               type="text"
               onChange={(e) => setMessage(e.target.value)}
@@ -143,6 +180,7 @@ function App() {
               className="chat__write-msg"
               placeholder="Escreva uma mensagem..."
             ></input>
+            
 
             <div className="chat__button-wrapper">
               <button className="chat__button" onClick={(e) => sendMessage(e)}>
