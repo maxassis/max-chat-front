@@ -82,11 +82,12 @@ function App() {
     }
   }
 
-  
   function show({ native }: { native: string }) {
-    // console.log(native);
     setMessage(`${message}${native}`);
-    //console.log(message);
+  }
+
+  function close() {
+    if(emojiShow) setEmojiShow(false);
   }
 
   return (
@@ -161,7 +162,7 @@ function App() {
               theme="light"
               previewPosition="none"
               onEmojiSelect={show}
-              // onClickOutside={() => setEmojiShow(false)}
+              onClickOutside={close}
               i18n={i18n}
             />
           </div>       
