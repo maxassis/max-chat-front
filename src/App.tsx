@@ -1,9 +1,10 @@
+import Chat from "./Chat";
 import AppRoutes from "./routes";
 
 function App() {
   return (
     <>
-     <AppRoutes />
+     <Chat />
     </>
   );
 }
