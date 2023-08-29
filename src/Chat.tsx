@@ -18,7 +18,7 @@ type Msg = {
   name: string
 };
 
-function App() {
+export default function Chat() {
   const [error, setError] = useState(false);
   const [emojiShow, setEmojiShow] = useState(false);
   const [chat, setchat] = useState<Msg[]>([]);
@@ -236,4 +236,3 @@ function App() {
   );
 }
 
-export default App;
