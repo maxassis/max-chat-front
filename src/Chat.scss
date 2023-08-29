@@ -166,6 +166,19 @@
         }
     }
 
+    &__input-editable {
+        border: 1px solid red;
+        min-block-size: 2.75rem;
+        max-block-size: 6.75rem;
+        padding: 0.69rem 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid rgba(34, 34, 34, 0.15);
+        box-shadow: 0px 1px 4px 0px rgba(34, 34, 34, 0.10) inset;
+        word-break: break-word;
+        overflow: auto;
+        font-size: 16px;
+    }
+
     &__button-wrapper {
         display: flex;
         justify-content: flex-end;

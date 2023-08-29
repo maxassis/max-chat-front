@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import i18n from "@emoji-mart/data/i18n/pt.json";
-
+import ContentEditable, {ContentEditableEvent} from "react-controlled-contenteditable";
 
 const socket = io("https://max-chat-f7uh.onrender.com");
 
@@ -21,12 +21,12 @@ type Msg = {
 function App() {
   const [error, setError] = useState(false);
   const [emojiShow, setEmojiShow] = useState(false);
-  const [message, setMessage] = useState("");
   const [chat, setchat] = useState<Msg[]>([]);
   const [modalInput, setModalInput] = useState("");
   const [name, setName] = useState("");
   const [modal, setModal] = useState(false);
   const ref = useRef<HTMLDivElement>(null)
+  const [content, setContent] = useState('');
 
   const scrollToLast = () => {
     const lastChildElement = ref.current?.lastElementChild;
@@ -63,13 +63,6 @@ function App() {
     'chat__emojis-wrapper': true
   })
 
-  function sendMessage(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();    
-    if(message.trimStart() === "") return
-    socket.emit("msgToServer", { user, name, message });
-    setMessage("");
-  }
-
   function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     !modalInput ? setError(false) : setName(modalInput);
@@ -83,27 +76,56 @@ function App() {
   }
 
   function show({ native }: { native: string }) {
-    setMessage(`${message}${native}`);
+    setContent(`${content}<span style="font-size: 18px">${native}</span>`);
   }
 
   function close() {
     if(emojiShow) setEmojiShow(false);
   }
 
+  const handleChange = (e: ContentEditableEvent) => {
+		setContent(e.target.value);
+   // console.log(content)
+	};
+
+  function sendMsg(e: React.KeyboardEvent) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      if(content.trimStart() === "") return
+      socket.emit("msgToServer", { user, name, message: content });
+      // console.log({ user, name, content });
+      
+      setContent("")  
+    }
+  }
+
+ function sendMsgButton(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+
+    if(content.trimStart() === "") return
+      socket.emit("msgToServer", { user, name, message: content });
+     // console.log({ user, name, content });
+      setContent("") 
+ }  
+
   return (
     <>
       <div className="external-container">
         <div className={modalShow}>
-            <div className="chat__modal-content">
-              <h3>Digite seu nome:</h3>
-              <h1>{message}</h1>  
-              <form>
-              <input type="text" value={modalInput} onChange={(e) => setModalInput(e.target.value)}/>
-              <span className={modalSpan} >Nome e obrigatorio</span>
+          <div className="chat__modal-content">
+            <h3>Digite seu nome:</h3>
+            <form>
+              <input
+                type="text"
+                value={modalInput}
+                onChange={(e) => setModalInput(e.target.value)}
+              />
+              <span className={modalSpan}>Nome e obrigatorio</span>
               {name}
               <button onClick={(e) => checkModalError(e)}>Enviar</button>
-              </form>
-            </div>
+            </form>
+          </div>
         </div>
 
         <div className="chat__container">
@@ -111,80 +133,99 @@ function App() {
             <h2 className="chat__name">Max Chat Beta</h2>
           </div>
 
-            <div className="chat__messages" >
-              <div className="chat__messages-container" ref={ref}>
-                {chat &&
-                  chat.map((item, index) => {
-                    if (item.user === user) {
-                      return (
-                        <div className="chat__msg-send" key={index}>
-                          <div className="chat__msg-send-wrapper">
-                            <div className="chat__message-send">
-                              <div style={{ textAlign: "right" }}>
-                                <span className="chat__msg-hour">12:30h</span>{" "}
-                                  {user === item.user ? <span className="chat__msg-name">{name}</span> : <span className="chat__msg-name">usuario</span>}
-                              </div>
-                              <p className="chat__msg-text">{item.message}</p>
+          <div className="chat__messages">
+            <div className="chat__messages-container" ref={ref}>
+              {chat &&
+                chat.map((item, index) => {
+                  if (item.user === user) {
+                    return (
+                      <div className="chat__msg-send" key={index}>
+                        <div className="chat__msg-send-wrapper">
+                          <div className="chat__message-send">
+                            <div style={{ textAlign: "right" }}>
+                              <span className="chat__msg-hour">12:30h</span>{" "}
+                              {user === item.user ? (
+                                <span className="chat__msg-name">{name}</span>
+                              ) : (
+                                <span className="chat__msg-name">usuario</span>
+                              )}
                             </div>
+                            <p className="chat__msg-text" dangerouslySetInnerHTML={{ __html: item.message }} />
                           </div>
-                          <div className="chat__circle-send">
+                        </div>
+                        <div className="chat__circle-send">
+                          <div className="chat__avatar"></div>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="chat__msg-received" key={index}>
+                        <div className="chat__msg-wrapper">
+                          <div className="chat__circle">
                             <div className="chat__avatar"></div>
                           </div>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div className="chat__msg-received" key={index}>
-                          <div className="chat__msg-wrapper">
-                            <div className="chat__circle">
-                              <div className="chat__avatar"></div>
-                            </div>
 
-                            <div className="chat__msg">
-                              <span className="chat__msg-name">{item.name}</span>{" "}
-                              <span className="chat__msg-hour">10:00h</span>
-                              <p className="chat__msg-text">{item.message}</p>
-                            </div>
+                          <div className="chat__msg">
+                            <span className="chat__msg-name">{item.name}</span>{" "}
+                            <span className="chat__msg-hour">10:00h</span>
+                            <p className="chat__msg-text" dangerouslySetInnerHTML={{ __html: item.message }} />
                           </div>
                         </div>
-                      );
-                    }
-                  })}
-              </div>
+                      </div>
+                    );
+                  }
+                })}
             </div>
+          </div>
 
           <form className="chat__form">
-          <div className={emoji}>
-            <Picker
-              data={data}
-              perLine="6"
-              emojiSize="24"
-              theme="light"
-              previewPosition="none"
-              onEmojiSelect={show}
-              onClickOutside={close}
-              i18n={i18n}
-            />
-          </div>       
-     
-          <div style={{cursor: 'pointer'}} onClick={() => setEmojiShow(!emojiShow)}>  
-          <svg className="chat__smile" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
-          </svg>
-          </div>      
+            <div className={emoji}>
+              <Picker
+                data={data}
+                perLine="6"
+                emojiSize="24"
+                theme="light"
+                previewPosition="none"
+                onEmojiSelect={show}
+                onClickOutside={close}
+                i18n={i18n}
+              />
+            </div>
 
-            <input
-              type="text"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              className="chat__write-msg"
-              placeholder="Escreva uma mensagem..."
-            ></input>
-            
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => setEmojiShow(!emojiShow)}
+            >
+              <svg
+                className="chat__smile"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
+              </svg>
+            </div>
+
+            <div style={{maxInlineSize: "100%", inlineSize: "100%" }}>    
+            <div>
+              <ContentEditable
+                onChange={handleChange}
+                html={content}
+                tagName="div"
+                className="chat__input-editable"
+                onKeyDown={(e) => sendMsg(e)}
+              />
+            </div>
+            </div>
 
             <div className="chat__button-wrapper">
-              <button className="chat__button" onClick={(e) => sendMessage(e)}>
+              <button className="chat__button" onClick={(e) => sendMsgButton(e)}>
                 Enviar
               </button>
             </div>
