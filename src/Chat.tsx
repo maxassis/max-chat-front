@@ -1,4 +1,4 @@
-import "./Chat.scss";
+import "./styles/Chat.scss";
 import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
