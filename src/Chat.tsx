@@ -76,7 +76,7 @@ export default function Chat() {
   }
 
   function show({ native }: { native: string }) {
-    setContent(`${content}<span style="font-size: 18px">${native}</span>`);
+    setContent(`${content}${native}`);
   }
 
   function close() {

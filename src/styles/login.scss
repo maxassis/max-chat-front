@@ -12,7 +12,6 @@
         block-size: 49.312rem;
         background: #FFF;
         overflow: hidden;
-
         border-radius: 1.5rem;
         border: 1px solid rgba(102, 102, 102, 0.50);
         background-color: #FFF;
@@ -154,4 +153,141 @@
 
         }
     }
+}
+
+
+.register {
+
+    &__wrapper{
+        @extend .login__wrapper;
+    }
+
+    &__content-wrapper{
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+        inline-size: 100%;
+        block-size: calc(100% - 200px);
+       // background-color: yellow;
+        padding: 3.5rem 4.34rem
+    }
+
+    &__title{
+        display: grid;
+        align-content: space-between;
+        inline-size: min(100%, 19rem);
+        block-size: 8.87rem;
+       // border: 1px solid red;
+
+    }
+
+    &__user {
+        inline-size: 3rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        //border: 1px solid red;
+        overflow: hidden;
+    }
+
+    &__avatar-img {
+        inline-size: 5rem;
+    }
+
+    &__create-account {
+        color: #333;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    &____login {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 400;
+
+        a {
+            color: #111;
+            text-decoration-line: underline;
+            cursor: pointer;
+            transition: font-weight 0.2s ease-in-out;
+
+            &:hover{
+                font-weight: bold;
+            }
+        }
+    }
+
+
+    &__inputs {
+        inline-size: min(100%, 33.06rem);
+        // border: 1px solid red;
+
+    }
+
+    &__input-wrapper{
+       @extend .login__input-wrapper;     
+    }
+
+    &__avatar-wrapper {
+        margin-block-start: 1.25rem;
+
+        >span {
+            display: block;
+            margin-block-end: 0.44rem;
+            color: #666;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        // >input {
+            // color: #666;
+            // font-size: 0.8rem;
+            // border-radius: 2rem;
+            // display: none;
+        // }
+
+        >label {
+            display: grid;
+            place-items: center;
+            background-color: green;
+            inline-size: 150px;
+            block-size: 30px;
+            border-radius: 1.21875rem;
+            padding: 0.40769rem 0.86963rem 0.37644rem 0.875rem;
+            cursor: pointer;
+            
+            >span {
+                color: #FFF;
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+
+
+            >input {
+                color: #666;
+                font-size: 0.8rem;
+                border-radius: 2rem;
+                display: none;
+            }
+        }
+
+    }
+
+    &__button{
+        @extend .login__button;
+        display: block;
+        margin-inline-start: auto;
+    }
+
+    &__avatar {
+        color: #FFF;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-block-start: 5px;
+    }
+
+    &__file {
+        font-size: 0.75rem !important;
+        margin-block-start: 5px;
+    }
+
 }
