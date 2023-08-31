@@ -254,7 +254,12 @@
             border-radius: 1.21875rem;
             padding: 0.40769rem 0.86963rem 0.37644rem 0.875rem;
             cursor: pointer;
-            
+            transition: background 0.4s ease-in-out;
+
+            &:hover {
+                background: darken(#2DA562, 15%);
+            }
+
             >span {
                 color: #FFF;
                 font-size: 0.75rem;
