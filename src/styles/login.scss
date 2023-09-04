@@ -183,15 +183,12 @@
         align-content: space-between;
         inline-size: min(100%, 19rem);
         block-size: 8.87rem;
-       // border: 1px solid red;
-
     }
 
     &__user {
         inline-size: 3.5rem;
         aspect-ratio: 1/1;
         border-radius: 50%;
-        //border: 1px solid red;
         overflow: hidden;
     }
 
@@ -225,13 +222,14 @@
 
     &__inputs {
         inline-size: min(100%, 33.06rem);
-        // border: 1px solid red;
-
     }
 
     &__input-wrapper{
-       @extend .login__input-wrapper;
-          
+       @extend .login__input-wrapper;          
+    }
+
+    &__error {
+       @extend .login__error 
     }
 
     &__avatar-wrapper {
