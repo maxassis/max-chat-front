@@ -4,28 +4,35 @@ import top from "./assets/imgs/top.avif";
 import google from "./assets/imgs/google.svg";
 import face from "./assets/imgs/face.svg";
 import { Link } from "react-router-dom"
-import { useState } from "react";
 import { useLocalStorage } from 'react-use';
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom'
+
+const schema = z.object({
+  name: z.string().nonempty("Campo obrigatorio").transform((name) => name.toLowerCase().trim()),
+  password: z.string().min(3, "Mínimo de 3 caracteres").transform((password) => password.trim()),
+});
+
+type LoginSchema = z.infer<typeof schema>
 
 export default function Login() {
-  const [name, setName] = useState("")
-  const [pass, setPass] = useState("")
   const [, setValue] = useLocalStorage('max-token', '');
- 
-  function send() {
-   const data = {
-    name,
-    password: pass,
-   }
+  const { register, handleSubmit, formState: { errors }} = useForm<LoginSchema>({ resolver: zodResolver(schema) });
+  const navigate = useNavigate();
 
+ 
+  function onSubmit(dt: {name: string, password: string} ) {      
     fetch("http://localhost:3333/auth/login", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(dt),
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
       .then((response) => response.text())
       .then((json) => {
         setValue(json)
+        navigate('chat');
       })
       .catch((err) => console.log(err));  
   }
@@ -48,10 +55,11 @@ export default function Login() {
 
         <h3 className="login__OR">OU</h3>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="login__input-wrapper">
             <span>Nome</span>
-            <input value={name} onChange={(e) => setName(e.target.value)} type="text" />
+            <input {...register("name")} type="text" />
+            {errors.password && <h6 className="login__error">{errors.name?.message}</h6>}
           </div>
 
           <div
@@ -59,10 +67,11 @@ export default function Login() {
             style={{ marginBlockStart: "1.12rem" }}
           >
             <span>Senha</span>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" />
+            <input type="password" {...register("password")} />
+            {errors.password && <h6 className="login__error">{errors.password?.message}</h6>}
           </div>
 
-          <button type="button" className="login__button" onClick={() => send()}>Entrar</button>
+          <button type="submit" className="login__button">Entrar</button>
           <span className="login__not-account">
             Não possui uma conta ? <Link to="/register">Cadastre-se</Link>
           </span>

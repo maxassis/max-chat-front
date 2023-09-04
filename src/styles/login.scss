@@ -89,6 +89,7 @@
         inline-size: min(100%, 35.5rem);
         margin-inline: auto;
         margin-block-start: 1.25rem;
+        position: relative;
 
         &> span {
             color: #666;
@@ -105,6 +106,11 @@
             border: 1px solid rgba(102, 102, 102, 0.35);
             padding-inline-start: 10px;
         }
+    }
+
+    &__error {
+        color: red;
+        position: absolute
     }
 
     &__button {
@@ -182,7 +188,7 @@
     }
 
     &__user {
-        inline-size: 3rem;
+        inline-size: 3.5rem;
         aspect-ratio: 1/1;
         border-radius: 50%;
         //border: 1px solid red;
@@ -224,7 +230,8 @@
     }
 
     &__input-wrapper{
-       @extend .login__input-wrapper;     
+       @extend .login__input-wrapper;
+          
     }
 
     &__avatar-wrapper {

@@ -5,13 +5,10 @@ import register from "./assets/imgs/register.avif";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-// interface InternalValues {
-//   file: any;
-// }
-
 export default function Register() {
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const values = useRef<any>(File);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +24,6 @@ export default function Register() {
       return false;
     }
 
-    console.log(values.current.file);
-    
 
     const formData = new FormData();
     formData.append('file', values.current.file);
