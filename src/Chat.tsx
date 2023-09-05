@@ -7,10 +7,19 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import i18n from "@emoji-mart/data/i18n/pt.json";
 import ContentEditable, {ContentEditableEvent} from "react-controlled-contenteditable";
+import { useLocalStorage } from 'react-use';
 
-const socket = io("https://max-chat-f7uh.onrender.com");
-
+// const socket = io("https://max-chat-f7uh.onrender.com");
+const socket = io("http://localhost:3333");
 const user = uuidv4();
+
+const decode = (token: string): string =>
+    decodeURIComponent(
+        atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
+            .split('')
+            .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
+            .join('')
+    );
 
 type Msg = {
   user: string;
@@ -27,7 +36,11 @@ export default function Chat() {
   const [modal, setModal] = useState(false);
   const ref = useRef<HTMLDivElement>(null)
   const [content, setContent] = useState('');
+  const [ tk ] = useLocalStorage('max-token', '');
 
+  const userTk = JSON.parse(decode(tk!))  
+   console.log(userTk);
+  
   const scrollToLast = () => {
     const lastChildElement = ref.current?.lastElementChild;
     lastChildElement?.scrollIntoView({ behavior: 'smooth' });
@@ -93,8 +106,8 @@ export default function Chat() {
       e.preventDefault();
 
       if(content.trimStart() === "") return
-      socket.emit("msgToServer", { user, name, message: content });
-      // console.log({ user, name, content });
+      socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, message: content });
+      console.log({ user: userTk.sub, name: userTk.name, message: content });
       
       setContent("")  
     }

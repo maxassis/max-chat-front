@@ -18,21 +18,13 @@ const schema = z.object({
 
 type RegisterSchema = z.infer<typeof schema>
 
-// const decode = (token: string) =>
-//     decodeURIComponent(
-//         atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
-//             .split('')
-//             .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
-//             .join('')
-//     );
-
 export default function Register() {
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const values = useRef<any>(File);
   const { register, handleSubmit, formState: { errors }} = useForm<RegisterSchema>({ resolver: zodResolver(schema) });
-  const [, setToken] = useLocalStorage('max-token', '');
+ // const [, setToken] = useLocalStorage('max-token', '');
   const navigate = useNavigate();
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,43 +42,43 @@ export default function Register() {
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
       .then((response) => response.json())
-      .then((json) => {
-        if(!json.token) {
-          alert(json.message)
+      .then((r) => {
+        const user = r.id;
+        // console.log(r);
+        
+        if(r.statusCode === 400) {
+          alert(r.message);
           return
         }
 
-        setToken(json.token)
-        const token = json.token
-
         if(values.current.file) {     
-         uploadAvatar(token)
-         return
-        }
+          uploadAvatar(user)
+          return
+         }
 
-        navigate('/chat')
+         navigate('/')
       })
-      .catch((err) => console.log(err));
-    
+      .catch((err) => console.log(err))
   }
 
-  const uploadAvatar = async (tk: string) => {
+  const uploadAvatar = async (id: string) => {
+    
+    console.log(id);
+    
+    
     const formData = new FormData();
     formData.append('file', values.current.file);
-    
+       
     try {
-      const response = await fetch('http://localhost:3333/users/upload', {
+      const response = await fetch(`http://localhost:3333/users/upload/${id}`, {
         method: 'POST',
         body: formData,
-        headers: {
-          "Authorization": "Bearer " + tk
-        }
       });
       if (!response.ok) {
         throw new Error(response.statusText);
       }
       console.log(response);
-      navigate('/chat')
+      navigate('/')
     } catch (err) {
       console.log(err);
     }
