@@ -6,7 +6,6 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocalStorage } from 'react-use';
 import { useNavigate } from 'react-router-dom'
 import { z } from "zod"
 
@@ -21,10 +20,10 @@ type RegisterSchema = z.infer<typeof schema>
 export default function Register() {
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const values = useRef<any>(File);
   const { register, handleSubmit, formState: { errors }} = useForm<RegisterSchema>({ resolver: zodResolver(schema) });
- // const [, setToken] = useLocalStorage('max-token', '');
   const navigate = useNavigate();
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +35,7 @@ export default function Register() {
 }
 
   function onSubmit(dt: {name: string, password: string} ) {
+    setLoading(true)
     fetch("http://localhost:3333/auth/register", {
       method: "POST",
       body: JSON.stringify(dt),
@@ -47,6 +47,7 @@ export default function Register() {
         // console.log(r);
         
         if(r.statusCode === 400) {
+          setLoading(false)
           alert(r.message);
           return
         }
@@ -62,10 +63,7 @@ export default function Register() {
   }
 
   const uploadAvatar = async (id: string) => {
-    
-    console.log(id);
-    
-    
+  
     const formData = new FormData();
     formData.append('file', values.current.file);
        
@@ -75,6 +73,7 @@ export default function Register() {
         body: formData,
       });
       if (!response.ok) {
+        setLoading(false)
         throw new Error(response.statusText);
       }
       console.log(response);
@@ -140,7 +139,7 @@ export default function Register() {
             </div>
 
             <button className="register__button">
-              Crie sua conta
+              {loading ? "Carregando..." : "Crie sua conta"}
             </button>
           </form>
         </div>

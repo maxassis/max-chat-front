@@ -9,6 +9,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const schema = z.object({
   name: z.string().nonempty("Campo obrigatorio").transform((name) => name.toLowerCase().trim()),
@@ -18,12 +19,14 @@ const schema = z.object({
 type LoginSchema = z.infer<typeof schema>
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const [, setValue] = useLocalStorage('max-token', '');
   const { register, handleSubmit, formState: { errors }} = useForm<LoginSchema>({ resolver: zodResolver(schema) });
   const navigate = useNavigate();
 
  
   function onSubmit(dt: {name: string, password: string} ) {      
+    setLoading(true)
     fetch("http://localhost:3333/auth/login", {
       method: "POST",
       body: JSON.stringify(dt),
@@ -34,7 +37,9 @@ export default function Login() {
         setValue(json)
         navigate('chat');
       })
-      .catch((err) => console.log(err));  
+      .catch((err) => {
+        setLoading(false)
+        console.log(err)});  
   }
 
   return (
@@ -71,7 +76,7 @@ export default function Login() {
             {errors.password && <h6 className="login__error">{errors.password?.message}</h6>}
           </div>
 
-          <button type="submit" className="login__button">Entrar</button>
+          <button type="submit" className="login__button">{loading ? "Carregando..." : "Entrar"}</button>
           <span className="login__not-account">
             Não possui uma conta ? <Link to="/register">Cadastre-se</Link>
           </span>
