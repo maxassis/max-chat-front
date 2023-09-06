@@ -11,7 +11,7 @@ import { useLocalStorage } from 'react-use';
 
 // const socket = io("https://max-chat-f7uh.onrender.com");
 const socket = io("http://localhost:3333");
-const user = uuidv4();
+//const user = uuidv4();
 
 const decode = (token: string): string =>
     decodeURIComponent(
@@ -39,7 +39,7 @@ export default function Chat() {
   const [ tk ] = useLocalStorage('max-token', '');
 
   const userTk = JSON.parse(decode(tk!))  
-   console.log(userTk);
+   //console.log(userTk);
   
   const scrollToLast = () => {
     const lastChildElement = ref.current?.lastElementChild;
@@ -49,44 +49,44 @@ export default function Chat() {
   useEffect(() => {
     function receivedMessage(message: Msg) {
       const newMessage: Msg = message;
-     // console.log(newMessage);
-      setchat([...chat, newMessage]);
+      
+      setchat([...chat, newMessage]);      
       setTimeout(() => {
         scrollToLast()
       }, 300);    
     }
 
-    socket.on("msgToClient", (message: Msg) => {
+    socket.on("msgToClient", (message: Msg) => {   
       receivedMessage(message);
     });
   }, [chat]);
 
-  const modalSpan = classNames({
-    'chat__modal-error' : true,
-    'chat__modal-error--show' : error && !modalInput
-  });
+  // const modalSpan = classNames({
+  //   'chat__modal-error' : true,
+  //   'chat__modal-error--show' : error && !modalInput
+  // });
 
-  const modalShow = classNames({
-    'chat__modal' : true,
-    'chat__modal--hidden' : modal
-  })
+  // const modalShow = classNames({
+  //   'chat__modal' : true,
+  //   'chat__modal--hidden' : modal
+  // })
 
   const emoji = classNames({
     'chat__emojis-wrapper--show': emojiShow,
     'chat__emojis-wrapper': true
   })
 
-  function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();
-    !modalInput ? setError(false) : setName(modalInput);
+  // function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  //   e.preventDefault();
+  //   !modalInput ? setError(false) : setName(modalInput);
     
-    if(!modalInput) {
-      setError(false);
-    } else {
-      setName(modalInput)
-      setModal(true);
-    }
-  }
+  //   if(!modalInput) {
+  //     setError(false);
+  //   } else {
+  //     setName(modalInput)
+  //     setModal(true);
+  //   }
+  // }
 
   function show({ native }: { native: string }) {
     setContent(`${content}${native}`);
@@ -106,8 +106,8 @@ export default function Chat() {
       e.preventDefault();
 
       if(content.trimStart() === "") return
-      socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, message: content });
-      console.log({ user: userTk.sub, name: userTk.name, message: content });
+      socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
+      console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
       
       setContent("")  
     }
@@ -117,15 +117,15 @@ export default function Chat() {
     e.preventDefault();
 
     if(content.trimStart() === "") return
-      socket.emit("msgToServer", { user, name, message: content });
-     // console.log({ user, name, content });
+      socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
+      console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
       setContent("") 
  }  
 
   return (
     <>
       <div className="external-container">
-        <div className={modalShow}>
+        {/* <div className={modalShow}>
           <div className="chat__modal-content">
             <h3>Digite seu nome:</h3>
             <form>
@@ -139,7 +139,7 @@ export default function Chat() {
               <button onClick={(e) => checkModalError(e)}>Enviar</button>
             </form>
           </div>
-        </div>
+        </div> */}
 
         <div className="chat__container">
           <div className="chat__users">
@@ -150,24 +150,20 @@ export default function Chat() {
             <div className="chat__messages-container" ref={ref}>
               {chat &&
                 chat.map((item, index) => {
-                  if (item.user === user) {
+                  if (item.user === userTk.sub) {
                     return (
                       <div className="chat__msg-send" key={index}>
                         <div className="chat__msg-send-wrapper">
                           <div className="chat__message-send">
                             <div style={{ textAlign: "right" }}>
                               <span className="chat__msg-hour">12:30h</span>{" "}
-                              {user === item.user ? (
-                                <span className="chat__msg-name">{name}</span>
-                              ) : (
-                                <span className="chat__msg-name">usuario</span>
-                              )}
+                                <span className="chat__msg-name">{userTk.name}</span>                              
                             </div>
                             <p className="chat__msg-text" dangerouslySetInnerHTML={{ __html: item.message }} />
                           </div>
                         </div>
                         <div className="chat__circle-send">
-                          <div className="chat__avatar"></div>
+                          <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${userTk.avatar})`}}></div>
                         </div>
                       </div>
                     );
@@ -176,7 +172,7 @@ export default function Chat() {
                       <div className="chat__msg-received" key={index}>
                         <div className="chat__msg-wrapper">
                           <div className="chat__circle">
-                            <div className="chat__avatar"></div>
+                            <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${item.avatar})`}}></div>
                           </div>
 
                           <div className="chat__msg">

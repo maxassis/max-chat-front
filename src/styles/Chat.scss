@@ -107,7 +107,7 @@
     &__circle {
         display: grid;
         place-items: center;
-        inline-size: 4.625ch;
+        inline-size: 50px;
         aspect-ratio: 1;
         border-radius: 50%;
         background-color: #fff;
@@ -117,10 +117,12 @@
     }
 
     &__avatar {
-        inline-size: 3.625ch;
+        inline-size: 40px;
         aspect-ratio: 1;
         border-radius: 50%;
-        background-color: black;
+        overflow: hidden;
+        background-position: center;
+        background-size: cover;
     }
 
     &__msg-send {
