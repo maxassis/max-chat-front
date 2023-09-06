@@ -1,5 +1,5 @@
 import "./styles/login.scss";
-import back from "./assets/imgs/back.avif";
+import back from "./assets/imgs/back2.avif";
 import "./styles/login.scss";
 import  userImg from "./assets/imgs/register.avif";
 import { useRef, useState } from "react";

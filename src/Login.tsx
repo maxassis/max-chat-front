@@ -1,5 +1,5 @@
 import "./styles/login.scss";
-import back from "./assets/imgs/back.avif";
+import back from "./assets/imgs/back2.avif";
 import top from "./assets/imgs/top.avif";
 import google from "./assets/imgs/google.svg";
 import face from "./assets/imgs/face.svg";

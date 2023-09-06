@@ -1,7 +1,7 @@
 import "./styles/Chat.scss";
 import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
+import back from "./assets/imgs/back2.avif";
 import classNames from 'classnames';
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -124,7 +124,7 @@ export default function Chat() {
 
   return (
     <>
-      <div className="external-container">
+      <div className="external-container" style={{ backgroundImage: `url(${back})` }}>
         {/* <div className={modalShow}>
           <div className="chat__modal-content">
             <h3>Digite seu nome:</h3>
