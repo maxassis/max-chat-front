@@ -2,6 +2,7 @@ import "./styles/Chat.scss";
 import io from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import back from "./assets/imgs/back2.avif";
+import noImg from "./assets/imgs/noimg.png";
 import classNames from 'classnames';
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -22,18 +23,15 @@ const decode = (token: string): string =>
     );
 
 type Msg = {
-  user: string;
-  message: string;
+  user: string
+  message: string
   name: string
+  avatar: string | null
 };
 
 export default function Chat() {
-  const [error, setError] = useState(false);
   const [emojiShow, setEmojiShow] = useState(false);
   const [chat, setchat] = useState<Msg[]>([]);
-  const [modalInput, setModalInput] = useState("");
-  const [name, setName] = useState("");
-  const [modal, setModal] = useState(false);
   const ref = useRef<HTMLDivElement>(null)
   const [content, setContent] = useState('');
   const [ tk ] = useLocalStorage('max-token', '');
@@ -61,33 +59,12 @@ export default function Chat() {
     });
   }, [chat]);
 
-  // const modalSpan = classNames({
-  //   'chat__modal-error' : true,
-  //   'chat__modal-error--show' : error && !modalInput
-  // });
-
-  // const modalShow = classNames({
-  //   'chat__modal' : true,
-  //   'chat__modal--hidden' : modal
-  // })
-
   const emoji = classNames({
     'chat__emojis-wrapper--show': emojiShow,
     'chat__emojis-wrapper': true
   })
 
-  // function checkModalError(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-  //   e.preventDefault();
-  //   !modalInput ? setError(false) : setName(modalInput);
-    
-  //   if(!modalInput) {
-  //     setError(false);
-  //   } else {
-  //     setName(modalInput)
-  //     setModal(true);
-  //   }
-  // }
-
+  
   function show({ native }: { native: string }) {
     setContent(`${content}${native}`);
   }
@@ -125,22 +102,6 @@ export default function Chat() {
   return (
     <>
       <div className="external-container" style={{ backgroundImage: `url(${back})` }}>
-        {/* <div className={modalShow}>
-          <div className="chat__modal-content">
-            <h3>Digite seu nome:</h3>
-            <form>
-              <input
-                type="text"
-                value={modalInput}
-                onChange={(e) => setModalInput(e.target.value)}
-              />
-              <span className={modalSpan}>Nome e obrigatorio</span>
-              {name}
-              <button onClick={(e) => checkModalError(e)}>Enviar</button>
-            </form>
-          </div>
-        </div> */}
-
         <div className="chat__container">
           <div className="chat__users">
             <h2 className="chat__name">Max Chat Beta</h2>
@@ -163,7 +124,11 @@ export default function Chat() {
                           </div>
                         </div>
                         <div className="chat__circle-send">
-                          <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${userTk.avatar})`}}></div>
+                            {!userTk.avatar ? 
+                              <div className="chat__avatar" style={{backgroundImage: `url(${noImg})`}}></div>
+                              :
+                              <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${item.avatar})`}}></div>
+                           }
                         </div>
                       </div>
                     );
@@ -172,7 +137,11 @@ export default function Chat() {
                       <div className="chat__msg-received" key={index}>
                         <div className="chat__msg-wrapper">
                           <div className="chat__circle">
-                            <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${item.avatar})`}}></div>
+                          {!item.avatar ? 
+                              <div className="chat__avatar" style={{backgroundImage: `url(${noImg})`}}></div>
+                              :
+                              <div className="chat__avatar" style={{backgroundImage: `url(https://cscsxpbybtxuhdnsnkou.supabase.co/storage/v1/object/public/chats-files/${item.avatar})`}}></div>
+                           }
                           </div>
 
                           <div className="chat__msg">
