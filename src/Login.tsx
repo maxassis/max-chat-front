@@ -44,7 +44,7 @@ export default function Login() {
         return 
       })
       .then(() => {
-        value && navigate('/chat')})
+        navigate('/')})
       .catch((err) => {
         setLoading(false)
         console.log(err)});  

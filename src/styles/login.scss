@@ -191,11 +191,11 @@
         inline-size: 3.5rem;
         aspect-ratio: 1/1;
         border-radius: 50%;
-        overflow: hidden;
+        overflow: hidden;    
     }
 
     &__avatar-img {
-        inline-size: 5rem;
+        @extend .register__user;
     }
 
     &__create-account {

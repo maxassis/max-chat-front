@@ -111,7 +111,7 @@
     &__circle {
         display: grid;
         place-items: center;
-        inline-size: 50px;
+        inline-size: 55px;
         aspect-ratio: 1;
         border-radius: 50%;
         background-color: #fff;
@@ -121,7 +121,7 @@
     }
 
     &__avatar {
-        inline-size: 40px;
+        inline-size: 45px;
         aspect-ratio: 1;
         border-radius: 50%;
         overflow: hidden;

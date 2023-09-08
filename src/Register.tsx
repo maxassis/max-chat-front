@@ -57,7 +57,7 @@ export default function Register() {
           return
          }
 
-         navigate('/')
+         navigate('/login')
       })
       .catch((err) => console.log(err))
   }
@@ -90,7 +90,7 @@ export default function Register() {
 
         <div className="register__content-wrapper">
           <div className="register__title">
-            <div className="register__user">
+            <div className="register__user" style={{ backgroundImage: `url(${file})` }}>
               <img className="register__avatar-img" src={file} />
             </div>
 

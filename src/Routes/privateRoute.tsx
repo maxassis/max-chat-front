@@ -9,5 +9,5 @@ export default function PrivateRoute({children}: Props) {
     const [value] = useLocalStorage('max-token', '');
     const user = value
 
-    return user ? children : <Navigate to="/" />
+    return user ? children : <Navigate to="/login" />
 }
