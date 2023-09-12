@@ -1,11 +1,11 @@
 .external-container {
     inline-size: 100%;
     block-size: 100dvh;
-   // background-color: #FAF8F7;
     display: flex;
     justify-content: center;
     background-size: cover;
     background-attachment: fixed;
+    // margin-inline: 10px;
 }
 
 .chat {
@@ -16,7 +16,8 @@
         max-inline-size: 68rem;
         inline-size: 100%;
        // block-size: 48.875rem;
-        margin-block-end: 40px;
+        margin-block-end: 2.5rem;
+        margin-inline: 0.625rem;
         padding: 0.62rem 1.88rem 1.25rem 1.88rem;
         margin-block-start: 3.75rem; 
         border-radius: 0.375rem 0.375rem 0rem 0rem;

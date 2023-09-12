@@ -20,7 +20,7 @@ type LoginSchema = z.infer<typeof schema>
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useLocalStorage('max-token', '');
+  const [, setValue] = useLocalStorage('max-token', '');
   const { register, handleSubmit, formState: { errors }} = useForm<LoginSchema>({ resolver: zodResolver(schema) });
   const navigate = useNavigate();
 

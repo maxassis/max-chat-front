@@ -104,7 +104,7 @@ export default function Chat() {
       <div className="external-container" style={{ backgroundImage: `url(${back})` }}>
         <div className="chat__container">
           <div className="chat__users">
-            <h2 className="chat__name">Max Chat Beta</h2>
+            <h2 className="chat__name">Max Chat</h2>
           </div>
 
           <div className="chat__messages">
