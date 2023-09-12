@@ -3,8 +3,6 @@
     min-block-size: 100dvh;
     display: grid;
     place-items: center;
-    //background-repeat: no-repeat;
-  //  background-position-x: center;
     background-size: cover;
     background-attachment: fixed;
 
@@ -142,7 +140,8 @@
 
     &__button {
         display: flex;
-        inline-size: 19rem;
+        //inline-size: 19rem;
+        inline-size: min(90%, 19rem);
         block-size: 4rem;
         padding: 1.03125rem 0rem 1.09375rem 0rem;
         justify-content: center;
@@ -193,6 +192,13 @@
 
     &__wrapper{
         @extend .login__wrapper;
+
+        @media (max-width: 768px) {
+            >img {
+                block-size: 153px;
+            }
+        }
+
     }
 
     &__content-wrapper{
@@ -201,8 +207,12 @@
         align-items: center;
         inline-size: 100%;
         block-size: calc(100% - 200px);
-       // background-color: yellow;
-        padding: 3.5rem 4.34rem
+        padding: 3.5rem 4.34rem;
+
+        @media (max-width: 805px) {
+            flex-direction: column;
+            padding: 30px 0 0 0;
+        }
     }
 
     &__title{
@@ -210,13 +220,22 @@
         align-content: space-between;
         inline-size: min(100%, 19rem);
         block-size: 8.87rem;
+
+        @media (max-width: 805px) {
+            block-size: auto;
+            justify-content: center;
+        }
     }
 
     &__user {
         inline-size: 3.5rem;
         aspect-ratio: 1/1;
         border-radius: 50%;
-        overflow: hidden;    
+        overflow: hidden; 
+        
+        @media (max-width: 805px) {
+            margin-inline: auto;
+        }
     }
 
     &__avatar-img {
@@ -227,6 +246,11 @@
         color: #333;
         font-size: 2rem;
         font-weight: 500;
+
+        @media (max-width: 805px) {
+            font-size: 1.5rem;
+            text-align: center;
+        }
     }
 
     &__login {
@@ -261,6 +285,11 @@
 
     &__avatar-wrapper {
         margin-block-start: 1.25rem;
+
+        @media (max-width: 600px) {
+            inline-size: min(90%, 35.5rem);
+            margin-inline: auto;
+        }
 
         >span {
             display: block;

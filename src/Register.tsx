@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom'
 import { z } from "zod"
+import noImg from "./assets/imgs/noimg.png";
 
 
 const schema = z.object({
@@ -90,9 +91,16 @@ export default function Register() {
 
         <div className="register__content-wrapper">
           <div className="register__title">
-            <div className="register__user" style={{ backgroundImage: `url(${file})` }}>
+            {file ?
+            (<div className="register__user" style={{ backgroundImage: `url(${file})` }}>
               <img className="register__avatar-img" src={file} />
-            </div>
+            </div>) 
+            :
+            (<div className="register__user" style={{ backgroundImage: `url(${noImg})` }}>
+               <img className="register__avatar-img" src={noImg} />
+             </div>
+            )
+          }
 
             <div>
               <h1 className="register__create-account">Crie sua conta</h1>
