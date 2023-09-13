@@ -78,7 +78,7 @@ export default function Register() {
         throw new Error(response.statusText);
       }
       console.log(response);
-      navigate('/')
+      navigate('/login')
     } catch (err) {
       console.log(err);
     }
