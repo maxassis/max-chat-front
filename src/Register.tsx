@@ -37,7 +37,7 @@ export default function Register() {
 
   function onSubmit(dt: {name: string, password: string} ) {
     setLoading(true)
-    fetch("http://localhost:3333/auth/register", {
+    fetch("https://max-chat-oudo.onrender.com/auth/register", {
       method: "POST",
       body: JSON.stringify(dt),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -69,7 +69,7 @@ export default function Register() {
     formData.append('file', values.current.file);
        
     try {
-      const response = await fetch(`http://localhost:3333/users/upload/${id}`, {
+      const response = await fetch(`https://max-chat-oudo.onrender.com/users/upload/${id}`, {
         method: 'POST',
         body: formData,
       });

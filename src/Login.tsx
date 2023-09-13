@@ -28,7 +28,7 @@ export default function Login() {
   function onSubmit(dt: {name: string, password: string} ) {      
     setLoading(true)
     setValue('')
-    fetch("http://localhost:3333/auth/login", {
+    fetch("https://max-chat-oudo.onrender.com/auth/login", {
       method: "POST",
       body: JSON.stringify(dt),
       headers: { "Content-type": "application/json; charset=UTF-8" },
