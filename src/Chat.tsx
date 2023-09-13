@@ -10,7 +10,7 @@ import i18n from "@emoji-mart/data/i18n/pt.json";
 import ContentEditable, {ContentEditableEvent} from "react-controlled-contenteditable";
 import { useLocalStorage } from 'react-use';
 
-const socket = io("https://max-chat-oudo.onrender.com");
+const socket = io("https://chat-3ok7.onrender.com");
 //const socket = io("http://localhost:3333");
 
 const decode = (token: string): string =>
@@ -83,7 +83,7 @@ export default function Chat() {
 
       if(content.trimStart() === "") return
       socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
-      console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
+     // console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
       
       setContent("")  
     }
@@ -94,7 +94,7 @@ export default function Chat() {
 
     if(content.trimStart() === "") return
       socket.emit("msgToServer", { user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
-      console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
+     // console.log({ user: userTk.sub, name: userTk.name, avatar: userTk.avatar, message: content });
       setContent("") 
  }  
 

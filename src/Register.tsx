@@ -37,7 +37,7 @@ export default function Register() {
 
   function onSubmit(dt: {name: string, password: string} ) {
     setLoading(true)
-    fetch("https://max-chat-oudo.onrender.com/auth/register", {
+    fetch("https://chat-3ok7.onrender.com/auth/register", {
       method: "POST",
       body: JSON.stringify(dt),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -69,7 +69,7 @@ export default function Register() {
     formData.append('file', values.current.file);
        
     try {
-      const response = await fetch(`https://max-chat-oudo.onrender.com/users/upload/${id}`, {
+      const response = await fetch(`https://chat-3ok7.onrender.com/users/upload/${id}`, {
         method: 'POST',
         body: formData,
       });
@@ -77,7 +77,7 @@ export default function Register() {
         setLoading(false)
         throw new Error(response.statusText);
       }
-      console.log(response);
+     // console.log(response);
       navigate('/login')
     } catch (err) {
       console.log(err);
