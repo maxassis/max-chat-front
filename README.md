@@ -31,9 +31,9 @@ npm run dev
 
 <br>
 
+![](https://images2.imgbox.com/a2/5d/LKVJaIA4_o.png)
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp1.png?token=GHSAT0AAAAAACHZZQV2XFXAIISU2Y4LVPK6ZI4KSAQ)
+![](https://images2.imgbox.com/3c/d5/6NBxGXfc_o.png)
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp3.png?token=GHSAT0AAAAAACHZZQV22WW2ZFF2H4VPZCPOZI4KT7A)
+![](https://images2.imgbox.com/1e/55/ZvHlvRgT_o.png)
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp4.png?token=GHSAT0AAAAAACHZZQV373PDPFTIJ2GHDRKQZI4KUMQ)
