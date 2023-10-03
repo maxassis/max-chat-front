@@ -1,4 +1,4 @@
-# Max Notes
+# Max Chat
 
 **Front-end do projeto Max Chat**
 
