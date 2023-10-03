@@ -32,8 +32,8 @@ npm run dev
 <br>
 
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp1.png?token=GHSAT0AAAAAACHZZQV2ODRLTYSSRBFU4XUWZI4JYCA)
+![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp1.png?token=GHSAT0AAAAAACHZZQV2XFXAIISU2Y4LVPK6ZI4KSAQ)
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp3.png?token=GHSAT0AAAAAACHZZQV2XDMWM7GFM2OI2DECZI4JYVA)
+![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp3.png?token=GHSAT0AAAAAACHZZQV22WW2ZFF2H4VPZCPOZI4KT7A)
 
-![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp4.png?token=GHSAT0AAAAAACHZZQV3KF4LCRLZOHEMBWRWZI4JZEA)
+![](https://raw.githubusercontent.com/maxassis/chat-socket/master/src/assets/imgs/comp4.png?token=GHSAT0AAAAAACHZZQV373PDPFTIJ2GHDRKQZI4KUMQ)
