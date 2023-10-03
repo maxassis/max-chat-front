@@ -37,7 +37,7 @@ export default function Register() {
 
   function onSubmit(dt: {name: string, password: string} ) {
     setLoading(true)
-    fetch("https://chat-3ok7.onrender.com/auth/register", {
+    fetch("http://localhost:3333/auth/register", {
       method: "POST",
       body: JSON.stringify(dt),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -69,7 +69,7 @@ export default function Register() {
     formData.append('file', values.current.file);
        
     try {
-      const response = await fetch(`https://chat-3ok7.onrender.com/users/upload/${id}`, {
+      const response = await fetch(`http://localhost:3333/users/upload/${id}`, {
         method: 'POST',
         body: formData,
       });

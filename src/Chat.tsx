@@ -10,8 +10,8 @@ import i18n from "@emoji-mart/data/i18n/pt.json";
 import ContentEditable, {ContentEditableEvent} from "react-controlled-contenteditable";
 import { useLocalStorage } from 'react-use';
 
-const socket = io("https://chat-3ok7.onrender.com");
-//const socket = io("http://localhost:3333");
+//const socket = io("https://chat-3ok7.onrender.com");
+const socket = io("http://localhost:3333");
 
 const decode = (token: string): string =>
     decodeURIComponent(
