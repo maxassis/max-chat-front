@@ -78,6 +78,7 @@
         align-items: flex-start;
         block-size: 100%;
         margin-block-end: 0.79rem;
+        word-break: break-word;
     }
 
     &__msg {
@@ -144,6 +145,7 @@
         background-color: #ECF9FD;
         padding: 0.41rem 0.88rem;
         border-radius: 0.625rem;
+        word-break: break-word;
     }
 
     &__message-send {
